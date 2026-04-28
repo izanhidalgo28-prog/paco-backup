@@ -12,18 +12,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .hero p{font-size:16px;color:#555;margin-bottom:8px}
 .arrow{font-size:48px;margin-top:30px;animation:bounce 1.5s infinite}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
-
 #cb-bubble{position:fixed;bottom:28px;right:28px;width:60px;height:60px;border-radius:50%;background:#185FA5;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(24,95,165,.5);z-index:9999;transition:transform .2s}
 #cb-bubble:hover{transform:scale(1.1)}
 #cb-bubble svg{width:28px;height:28px;fill:white}
-#cb-box{position:fixed;bottom:100px;right:28px;width:340px;height:500px;background:#fff;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.2);z-index:9998;display:none;flex-direction:column;overflow:hidden}
+#cb-box{position:fixed;bottom:100px;right:28px;width:340px;height:520px;background:#fff;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.2);z-index:9998;display:none;flex-direction:column;overflow:hidden}
 #cb-box.open{display:flex}
 #cb-head{background:#185FA5;padding:14px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0}
-.h-av{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center}
-.h-av svg{width:20px;height:20px;fill:white}
 .h-info .nm{color:#fff;font-size:14px;font-weight:600;margin:0}
 .h-info .st{color:rgba(255,255,255,.75);font-size:11px;margin:2px 0 0}
-#cb-close{margin-left:auto;background:none;border:none;color:#fff;font-size:24px;cursor:pointer;line-height:1;padding:0}
+#cb-close{margin-left:auto;background:none;border:none;color:#fff;font-size:24px;cursor:pointer}
 #cb-msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;background:#f5f7ff}
 .msg{max-width:83%;display:flex;flex-direction:column;gap:2px}
 .msg.b{align-self:flex-start}.msg.u{align-self:flex-end}
@@ -33,21 +30,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tm{font-size:10px;color:#aab;padding:0 3px}
 .msg.b .tm{align-self:flex-start}.msg.u .tm{align-self:flex-end}
 #cb-qr{padding:8px 12px 5px;display:flex;flex-wrap:wrap;gap:5px;background:#fff;border-top:1px solid #eef;flex-shrink:0}
-.qb{background:none;border:1.5px solid #185FA5;color:#185FA5;border-radius:20px;padding:5px 11px;font-size:12px;cursor:pointer;font-family:inherit}
+.qb{background:none;border:1.5px solid #185FA5;color:#185FA5;border-radius:20px;padding:5px 11px;font-size:12px;cursor:pointer}
 .qb:hover{background:#eaf2ff}
 #cb-form{display:flex;gap:8px;padding:10px 12px;background:#fff;border-top:1px solid #eef;flex-shrink:0}
-#cb-input{flex:1;border:1.5px solid #dde3f0;border-radius:20px;padding:8px 14px;font-size:13px;outline:none;font-family:inherit}
+#cb-input{flex:1;border:1.5px solid #dde3f0;border-radius:20px;padding:8px 14px;font-size:13px;outline:none}
 #cb-input:focus{border-color:#185FA5}
 #cb-send{background:#185FA5;color:#fff;border:none;border-radius:50%;width:38px;height:38px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-#cb-send:hover{background:#0C447C}
 #cb-send svg{width:16px;height:16px;fill:white}
 .dot{width:6px;height:6px;border-radius:50%;background:#bbb;animation:dt 1.2s infinite;display:inline-block;margin:0 2px}
 .dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
 @keyframes dt{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+.form-cita{background:#fff;border:1px solid #e0e8f5;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px;width:100%}
+.form-cita h4{font-size:13px;font-weight:600;color:#185FA5;margin:0}
+.form-cita input,.form-cita select{width:100%;border:1px solid #dde3f0;border-radius:8px;padding:7px 10px;font-size:12px;outline:none;font-family:inherit}
+.form-cita input:focus,.form-cita select:focus{border-color:#185FA5}
+.form-cita button{background:#185FA5;color:#fff;border:none;border-radius:8px;padding:9px;font-size:13px;font-weight:600;cursor:pointer;width:100%}
+.form-cita button:hover{background:#0C447C}
+.form-cita button:disabled{background:#aaa;cursor:not-allowed}
 </style>
 </head>
 <body>
-
 <div class="hero">
   <h1>Chatbot para Clínicas</h1>
   <p>Asistente virtual con IA — disponible 24/7</p>
@@ -56,12 +58,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 
 <div id="cb-bubble">
-  <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 10H6V10h12v2zm0-3H6V7h12v2z"/></svg>
+  <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
 </div>
 
 <div id="cb-box">
   <div id="cb-head">
-    <div class="h-av"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg></div>
     <div class="h-info">
       <p class="nm">ClínicaSalud</p>
       <p class="st">En línea · responde al instante</p>
@@ -77,14 +78,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 
 <script>
-var INFO={
-  nombre:'ClínicaSalud',
-  especialidades:'Medicina general, Cardiología, Dermatología, Pediatría, Ginecología, Psicología',
-  horarios:'Lunes a Viernes 8am–8pm, Sábados 9am–2pm',
-  telefono:'800-000-0000',
-  precios:'Consulta general $350, Especialistas desde $450',
-  seguros:'IMSS, ISSSTE, GNP, AXA, Metlife'
-};
+var SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxNJTkjcBXCG7JGMWNPy1pqglZiHOwqek8nBUu9xYGB3X0gm-soUohxkEnIKx8opORy/exec';
+var INFO={nombre:'ClínicaSalud',especialidades:'Medicina general,Cardiología,Dermatología,Pediatría,Ginecología,Psicología',horarios:'Lunes a Viernes 8am–8pm, Sábados 9am–2pm',telefono:'800-000-0000',precios:'Consulta general $350, Especialistas desde $450',seguros:'IMSS, ISSSTE, GNP, AXA, Metlife'};
 var QR=['Agendar una cita','Ver especialidades','Horarios y costos','Hablar con alguien'];
 var chatHistory=[],busy=false,started=false;
 
@@ -97,21 +92,53 @@ function addMsg(txt,who){
   m.appendChild(d);m.scrollTop=m.scrollHeight;
 }
 
-function showTyping(){
-  var m=document.getElementById('cb-msgs'),d=document.createElement('div');
-  d.className='msg b';d.id='typing';
-  d.innerHTML='<div class="bbl"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';
+function addForm(){
+  var m=document.getElementById('cb-msgs');
+  var specs=INFO.especialidades.split(',').map(function(s){return '<option>'+s.trim()+'</option>'}).join('');
+  var d=document.createElement('div');
+  d.className='msg b';
+  d.style.maxWidth='100%';
+  d.innerHTML='<div class="form-cita">'+
+    '<h4>Solicitar cita</h4>'+
+    '<input id="f-nombre" type="text" placeholder="Nombre completo"/>'+
+    '<input id="f-telefono" type="tel" placeholder="Teléfono"/>'+
+    '<select id="f-especialidad"><option value="">Especialidad...</option>'+specs+'</select>'+
+    '<input id="f-dia" type="text" placeholder="Día preferido (ej: martes)"/>'+
+    '<select id="f-hora"><option value="">Horario preferido...</option><option>Mañana (8am–12pm)</option><option>Tarde (12pm–4pm)</option><option>Noche (4pm–8pm)</option></select>'+
+    '<button id="f-btn" onclick="enviarCita()">Solicitar cita</button>'+
+  '</div>';
   m.appendChild(d);m.scrollTop=m.scrollHeight;
 }
-function hideTyping(){var e=document.getElementById('typing');if(e)e.remove();}
 
-function setQR(){
-  var q=document.getElementById('cb-qr');q.innerHTML='';
-  QR.forEach(function(r){
-    var b=document.createElement('button');b.className='qb';b.textContent=r;
-    b.onclick=function(){doSend(r)};q.appendChild(b);
+function enviarCita(){
+  var nombre=document.getElementById('f-nombre').value.trim();
+  var telefono=document.getElementById('f-telefono').value.trim();
+  var especialidad=document.getElementById('f-especialidad').value;
+  var dia=document.getElementById('f-dia').value.trim();
+  var hora=document.getElementById('f-hora').value;
+  if(!nombre||!telefono||!especialidad||!dia||!hora){
+    alert('Por favor rellena todos los campos.');return;
+  }
+  var btn=document.getElementById('f-btn');
+  btn.disabled=true;btn.textContent='Enviando...';
+  fetch(SHEETS_URL,{
+    method:'POST',
+    mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({nombre:nombre,telefono:telefono,tratamiento:especialidad,dia:dia,hora:hora})
+  }).then(function(){
+    btn.textContent='¡Cita enviada!';
+    addMsg('Perfecto '+nombre+', tu cita de '+especialidad+' para el '+dia+' por la '+hora.split(' ')[0].toLowerCase()+' ha sido registrada. Te contactaremos al '+telefono+' para confirmar.','b');
+    chatHistory.push({role:'assistant',content:'Cita registrada para '+nombre});
+  }).catch(function(){
+    btn.disabled=false;btn.textContent='Solicitar cita';
+    addMsg('Hubo un error al registrar la cita. Llámanos al '+INFO.telefono,'b');
   });
 }
+
+function showTyping(){var m=document.getElementById('cb-msgs'),d=document.createElement('div');d.className='msg b';d.id='cb-ty';d.innerHTML='<div class="bbl"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';m.appendChild(d);m.scrollTop=m.scrollHeight;}
+function hideTyping(){var e=document.getElementById('cb-ty');if(e)e.remove();}
+function setQR(){var q=document.getElementById('cb-qr');q.innerHTML='';QR.forEach(function(r){var b=document.createElement('button');b.className='qb';b.textContent=r;b.onclick=function(){doSend(r)};q.appendChild(b);});}
 
 async function doSend(txt){
   if(busy||!txt.trim())return;
@@ -119,56 +146,31 @@ async function doSend(txt){
   document.getElementById('cb-qr').innerHTML='';
   addMsg(txt,'u');
   chatHistory.push({role:'user',content:txt});
+  if(txt.toLowerCase().indexOf('agendar')>-1||txt.toLowerCase().indexOf('cita')>-1){
+    showTyping();
+    setTimeout(function(){hideTyping();addMsg('Rellena el formulario para solicitar tu cita:','b');addForm();busy=false;},600);
+    return;
+  }
   showTyping();
   try{
-    var r=await fetch('/api/chat',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({messages:chatHistory,clinicInfo:INFO})
-    });
+    var r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:chatHistory,clinicInfo:INFO})});
     var d=await r.json();
     hideTyping();
-    var reply=d.reply||'Lo siento, hubo un error. Intenta de nuevo.';
+    var reply=d.reply||'Lo siento, hubo un error.';
     addMsg(reply,'b');
     chatHistory.push({role:'assistant',content:reply});
-  }catch(e){
-    hideTyping();
-    addMsg('Error de conexión. Por favor intenta de nuevo.','b');
-  }
+  }catch(e){hideTyping();addMsg('Error de conexión. Intenta de nuevo.','b');}
   busy=false;
 }
 
 document.getElementById('cb-bubble').onclick=function(){
   var box=document.getElementById('cb-box');
-  if(box.classList.contains('open')){
-    box.classList.remove('open');
-  } else {
-    box.classList.add('open');
-    if(!started){
-      started=true;
-      addMsg('Hola, bienvenido a ClínicaSalud. Soy tu asistente virtual. ¿En qué te puedo ayudar hoy?','b');
-      setQR();
-    }
-  }
+  if(box.classList.contains('open')){box.classList.remove('open');}
+  else{box.classList.add('open');if(!started){started=true;addMsg('Hola, bienvenido a ClínicaSalud. Soy tu asistente virtual. ¿En qué te puedo ayudar?','b');setQR();}}
 };
-
-document.getElementById('cb-close').onclick=function(e){
-  e.stopPropagation();
-  document.getElementById('cb-box').classList.remove('open');
-};
-
-document.getElementById('cb-send').onclick=function(){
-  var v=document.getElementById('cb-input').value.trim();
-  if(v){doSend(v);document.getElementById('cb-input').value='';}
-};
-
-document.getElementById('cb-input').onkeydown=function(e){
-  if(e.key==='Enter'){
-    var v=e.target.value.trim();
-    if(v){doSend(v);e.target.value='';}
-  }
-};
+document.getElementById('cb-close').onclick=function(e){e.stopPropagation();document.getElementById('cb-box').classList.remove('open');};
+document.getElementById('cb-send').onclick=function(){var v=document.getElementById('cb-input').value.trim();if(v){doSend(v);document.getElementById('cb-input').value='';}};
+document.getElementById('cb-input').onkeydown=function(e){if(e.key==='Enter'){var v=e.target.value.trim();if(v){doSend(v);e.target.value='';}}}; 
 </script>
 </body>
 </html>
-
